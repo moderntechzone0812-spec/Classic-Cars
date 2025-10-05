@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation - Thank You</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #0d1a26;
+            --accent-color: #ffc72c;
+            --text-color: #e6e6e6;
+            --secondary-text: #aaaaaa;
+            --font-family-serif: 'Playfair Display', serif;
+            --font-family-title: 'Cinzel', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-serif);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-color);
+        }
+
+        /* === Header & Navigation (Consistent) === */
+        .header {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-family-title);
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-family-serif);
+            font-weight: 700;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* === Thank You Layout === */
+        .thankyou-section {
+            padding: 100px 5% 60px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+        }
+
+        .confirmation-box {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 50px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 600px;
+            width: 100%;
+            border-top: 5px solid var(--accent-color);
+            transform: translateY(20px);
+            opacity: 0;
+            transition: opacity 1s ease-out, transform 1s ease-out;
+        }
+
+        .confirmation-box.fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .confirmation-box h1 {
+            font-family: var(--font-family-title);
+            color: var(--accent-color);
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+
+        .confirmation-box p {
+            font-size: 1.2rem;
+            color: var(--secondary-text);
+            margin-bottom: 30px;
+        }
+
+        .car-image-small {
+            width: 100%;
+            max-width: 350px;
+            height: auto;
+            border-radius: 8px;
+            margin: 20px auto;
+            display: block;
+            object-fit: cover;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        }
+
+        /* === Button === */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+        }
+
+        /* === Footer (Consistent) === */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--secondary-text);
+            text-align: center;
+            padding: 20px 5%;
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        /* === Responsiveness (Consistent) === */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links li {
+                margin: 0 10px 10px 10px;
+            }
+            .confirmation-box h1 {
+                font-size: 2rem;
+            }
+            .confirmation-box {
+                padding: 30px;
+            }
+        }
+    </style>
+</head>
+<body id="page-body">
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">LUXE CLASSICS</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="form.html">Book / Inquire</a></li>
+                    <li><a href="payment.html">Payment</a></li>
+                    <li><a href="thankyou.html" class="active">Confirmation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="thankyou-section">
+            <div class="confirmation-box" id="confirmation-box">
+                <h1>✅ Thank You for Your Booking!</h1>
+                <p>Your classic car experience has been successfully reserved. A detailed confirmation will be sent to your email shortly.</p>
+                <img src="https://picsum.photos/400/250?random=5" alt="Confirmation Classic Car" class="car-image-small">
+                <a href="index.html" class="btn">Return to Homepage</a>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Classic Cars 2025 | All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="Instagram">📸</a>
+        </div>
+    </footer>
+
+    <script>
+        // JavaScript: Page Body Fade-In on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('page-body').style.opacity = '1';
+        });
+
+        // JavaScript: Confirmation Box Fade-In Animation
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                document.getElementById('confirmation-box').classList.add('fade-in');
+            }, 500); // 500ms delay for a smoother effect after body load
+        });
+    </script>
+</body>
+</html>
