@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Classic Car Collection - Home</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #0d1a26; /* Deep Metallic Blue */
+            --accent-color: #ffc72c; /* Gold Accent */
+            --text-color: #e6e6e6; /* Light Gray/Silver */
+            --secondary-text: #aaaaaa;
+            --font-family-serif: 'Playfair Display', serif;
+            --font-family-title: 'Cinzel', serif;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-serif);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-color);
+        }
+
+        /* === Header & Navigation === */
+        .header {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-family-title);
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-family-serif);
+            font-weight: 700;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* === Hero Section === */
+        .hero {
+            position: relative;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            margin-top: 60px; /* Offset for fixed header */
+            overflow: hidden;
+        }
+
+        .hero-bg {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://source.unsplash.com/featured/?classic-car,vintage,luxury') no-repeat center center/cover;
+            filter: brightness(0.5);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 5;
+            padding: 20px;
+            max-width: 800px;
+        }
+
+        .hero-content h1 {
+            font-family: var(--font-family-title);
+            font-size: 4rem;
+            color: var(--accent-color);
+            text-shadow: 0 0 10px rgba(0, 0, 0, 0.8);
+            margin-bottom: 15px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        .hero-content p {
+            font-size: 1.3rem;
+            margin-bottom: 30px;
+            text-shadow: 0 0 5px rgba(0, 0, 0, 0.8);
+            animation: fadeInUp 1.5s ease-out;
+        }
+
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            text-transform: uppercase;
+        }
+
+        .btn:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+        }
+
+        /* === Main Content & Intro === */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 5%;
+        }
+
+        .intro-section {
+            text-align: center;
+            padding: 60px 0;
+        }
+
+        .intro-section h2 {
+            font-family: var(--font-family-title);
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            margin-bottom: 20px;
+        }
+
+        .intro-section p {
+            max-width: 800px;
+            margin: 0 auto 30px;
+            font-size: 1.1rem;
+            color: var(--secondary-text);
+        }
+
+        /* === Gallery === */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 40px 0;
+        }
+
+        .gallery-item {
+            overflow: hidden;
+            border-radius: 8px;
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.3);
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05); /* Hover Zoom Effect */
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            display: block;
+            transition: transform 0.4s ease;
+        }
+
+        .gallery-item-info {
+            padding: 15px;
+            background-color: rgba(13, 26, 38, 0.8);
+            border-top: 1px solid var(--accent-color);
+            text-align: center;
+        }
+
+        .gallery-item-info h3 {
+            font-family: var(--font-family-title);
+            color: var(--accent-color);
+        }
+
+        /* === Footer === */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--secondary-text);
+            text-align: center;
+            padding: 20px 5%;
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        /* === Animations === */
+        @keyframes fadeInDown {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* === Responsiveness === */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links li {
+                margin: 0 10px 10px 10px;
+            }
+            .hero-content h1 {
+                font-size: 3rem;
+            }
+            .hero-content p {
+                font-size: 1.1rem;
+            }
+            .gallery-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body id="page-body">
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">LUXE CLASSICS</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Home</a></li>
+                    <li><a href="form.html">Book / Inquire</a></li>
+                    <li><a href="payment.html">Payment</a></li>
+                    <li><a href="thankyou.html">Confirmation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="hero">
+            <div class="hero-bg" role="img" aria-label="AI-generated classic car image"></div>
+            <div class="hero-content">
+                <h1>Classic Car Collection</h1>
+                <p>Where history meets the road. Explore the timeless elegance and raw power of automotive legends.</p>
+                <a href="form.html" class="btn">Explore & Book Cars</a>
+            </div>
+        </section>
+
+        <section class="intro-section container">
+            <h2>The Legacy on Wheels</h2>
+            <p>Step into a world of automotive art. Each vintage car tells a story of craftsmanship, passion, and a bygone era of luxury. Our curated collection represents the pinnacle of classic engineering and design, offering you a chance to own or experience a piece of history.</p>
+        </section>
+
+        <section class="gallery container">
+            <h2 style="text-align: center; font-family: var(--font-family-title); color: var(--accent-color); margin-bottom: 30px;">Featured Masterpieces</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/400?random=1" alt="Classic Car 1">
+                    <div class="gallery-item-info">
+                        <h3>1965 GT Speedster</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/400?random=2" alt="Classic Car 2">
+                    <div class="gallery-item-info">
+                        <h3>1957 Roadster Elegance</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/400?random=3" alt="Classic Car 3">
+                    <div class="gallery-item-info">
+                        <h3>1970 Muscle Coupe</h3>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://picsum.photos/600/400?random=4" alt="Classic Car 4">
+                    <div class="gallery-item-info">
+                        <h3>1935 Baron Limousine</h3>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Classic Cars 2025 | All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="Instagram">📸</a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript: Body Fade-In on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('page-body').style.opacity = '1';
+        });
+
+        // Simple JavaScript: Smooth Scroll to Gallery
+        document.querySelector('.btn').addEventListener('click', function(e) {
+            // Check if the button is for 'Explore & Book Cars'
+            if (this.getAttribute('href') === 'form.html') {
+                // Do not prevent default navigation to form.html
+                return;
+            }
+            // If the button were for scrolling (e.g., href="#gallery"),
+            // we would use: e.preventDefault();
+            // document.querySelector('#gallery').scrollIntoView({ behavior: 'smooth' });
+        });
+    </script>
+</body>
+</html>
