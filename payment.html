@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Complete Your Payment</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700&family=Playfair+Display:wght@400;700&display=swap');
+
+        :root {
+            --primary-color: #0d1a26;
+            --accent-color: #ffc72c;
+            --text-color: #e6e6e6;
+            --secondary-text: #aaaaaa;
+            --font-family-serif: 'Playfair Display', serif;
+            --font-family-title: 'Cinzel', serif;
+            --error-color: #e74c3c;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: var(--font-family-serif);
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+        }
+
+        a {
+            text-decoration: none;
+            color: var(--accent-color);
+            transition: color 0.3s ease;
+        }
+
+        a:hover {
+            color: var(--text-color);
+        }
+
+        /* === Header & Navigation (Consistent) === */
+        .header {
+            background-color: var(--primary-color);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            font-family: var(--font-family-title);
+            font-size: 1.8rem;
+            color: var(--accent-color);
+            font-weight: 700;
+            letter-spacing: 2px;
+        }
+
+        .nav-links {
+            list-style: none;
+            display: flex;
+        }
+
+        .nav-links li {
+            margin-left: 25px;
+        }
+
+        .nav-links a {
+            font-family: var(--font-family-serif);
+            font-weight: 700;
+            padding: 5px 10px;
+            border-bottom: 2px solid transparent;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--text-color);
+            border-bottom: 2px solid var(--accent-color);
+        }
+
+        /* === Payment Layout === */
+        .payment-section {
+            padding: 100px 5% 60px;
+            min-height: calc(100vh - 80px);
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+        }
+
+        .payment-container {
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            width: 100%;
+            border-top: 5px solid var(--accent-color);
+        }
+
+        .payment-container h1 {
+            font-family: var(--font-family-title);
+            color: var(--accent-color);
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 2.2rem;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 700;
+            color: var(--text-color);
+        }
+
+        input[type="text"] {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--secondary-text);
+            border-radius: 5px;
+            background-color: var(--primary-color);
+            color: var(--text-color);
+            font-family: var(--font-family-serif);
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        input:focus {
+            border-color: var(--accent-color);
+            outline: none;
+        }
+
+        .input-row {
+            display: flex;
+            gap: 20px;
+        }
+
+        .input-row > div {
+            flex: 1;
+        }
+
+        .error-message {
+            color: var(--error-color);
+            font-size: 0.9rem;
+            margin-top: 5px;
+            display: none;
+        }
+
+        /* === Button === */
+        .btn {
+            display: block;
+            width: 100%;
+            background-color: var(--accent-color);
+            color: var(--primary-color);
+            padding: 12px 30px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.2s;
+            text-transform: uppercase;
+            text-align: center;
+        }
+
+        .btn:hover {
+            background-color: var(--text-color);
+            transform: translateY(-2px);
+        }
+
+        /* === Footer (Consistent) === */
+        .footer {
+            background-color: var(--primary-color);
+            color: var(--secondary-text);
+            text-align: center;
+            padding: 20px 5%;
+            border-top: 1px solid rgba(255, 199, 44, 0.2);
+            font-size: 0.9rem;
+        }
+
+        .social-icons a {
+            margin: 0 10px;
+            font-size: 1.2rem;
+        }
+
+        .social-icons {
+            margin-top: 10px;
+        }
+
+        /* === Responsiveness (Consistent) === */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+            }
+            .nav-links {
+                margin-top: 10px;
+                flex-wrap: wrap;
+                justify-content: center;
+            }
+            .nav-links li {
+                margin: 0 10px 10px 10px;
+            }
+            .input-row {
+                flex-direction: column;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+<body id="page-body">
+    <header class="header">
+        <div class="navbar">
+            <div class="logo">LUXE CLASSICS</div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="form.html">Book / Inquire</a></li>
+                    <li><a href="payment.html" class="active">Payment</a></li>
+                    <li><a href="thankyou.html">Confirmation</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+        <section class="payment-section">
+            <div class="payment-container">
+                <h1>Secure Payment</h1>
+                <p style="text-align: center; margin-bottom: 25px; color: var(--secondary-text);">Total Due: $250.00 USD (Deposit)</p>
+                <form id="payment-form" action="thankyou.html" method="GET" onsubmit="return validatePayment()">
+                    <div class="form-group">
+                        <label for="card-name">Cardholder Name *</label>
+                        <input type="text" id="card-name" name="card-name" required>
+                        <p class="error-message" id="card-name-error">Cardholder name is required.</p>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="card-number">Card Number *</label>
+                        <input type="text" id="card-number" name="card-number" maxlength="16" placeholder="XXXX XXXX XXXX XXXX" required>
+                        <p class="error-message" id="card-number-error">Must be 16 digits.</p>
+                    </div>
+
+                    <div class="input-row">
+                        <div class="form-group">
+                            <label for="expiry-date">Expiry Date (MM/YY) *</label>
+                            <input type="text" id="expiry-date" name="expiry-date" maxlength="5" placeholder="MM/YY" required>
+                            <p class="error-message" id="expiry-date-error">Format: MM/YY (e.g., 12/26).</p>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="cvv">CVV *</label>
+                            <input type="text" id="cvv" name="cvv" maxlength="4" placeholder="***" required>
+                            <p class="error-message" id="cvv-error">Must be 3 or 4 digits.</p>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn">Complete Payment</button>
+                </form>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <p>&copy; Classic Cars 2025 | All Rights Reserved.</p>
+        <div class="social-icons">
+            <a href="#" aria-label="Facebook">📘</a>
+            <a href="#" aria-label="Twitter">🐦</a>
+            <a href="#" aria-label="Instagram">📸</a>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript: Body Fade-In on Load
+        document.addEventListener('DOMContentLoaded', () => {
+            document.getElementById('page-body').style.opacity = '1';
+        });
+
+        // Simple JavaScript: Payment Validation
+        function validatePayment() {
+            let isValid = true;
+            const form = document.getElementById('payment-form');
+
+            // Helper function to show/hide error message
+            const toggleError = (fieldId, show, message = '') => {
+                const errorElement = document.getElementById(fieldId + '-error');
+                if (errorElement) {
+                    errorElement.textContent = message || errorElement.dataset.defaultMessage;
+                    errorElement.style.display = show ? 'block' : 'none';
+                    if (!errorElement.dataset.defaultMessage) {
+                        errorElement.dataset.defaultMessage = errorElement.textContent;
+                    }
+                }
+            };
+
+            // 1. Cardholder Name
+            const cardName = form.elements['card-name'];
+            if (!cardName.value.trim()) {
+                isValid = false;
+                toggleError('card-name', true);
+            } else {
+                toggleError('card-name', false);
+            }
+
+            // 2. Card Number (16 digits check)
+            const cardNumber = form.elements['card-number'];
+            const cardNumValue = cardNumber.value.replace(/\s/g, ''); // Remove spaces
+            if (cardNumValue.length !== 16 || isNaN(cardNumValue)) {
+                isValid = false;
+                toggleError('card-number', true, 'Card number must be exactly 16 digits.');
+            } else {
+                toggleError('card-number', false);
+            }
+
+            // 3. Expiry Date (MM/YY format check)
+            const expiryDate = form.elements['expiry-date'];
+            const expiryRegex = /^(0[1-9]|1[0-2])\/\d{2}$/; // MM/YY
+            if (!expiryRegex.test(expiryDate.value)) {
+                isValid = false;
+                toggleError('expiry-date', true);
+            } else {
+                toggleError('expiry-date', false);
+            }
+
+            // 4. CVV (3 or 4 digits check)
+            const cvv = form.elements['cvv'];
+            if (cvv.value.length < 3 || cvv.value.length > 4 || isNaN(cvv.value)) {
+                isValid = false;
+                toggleError('cvv', true);
+            } else {
+                toggleError('cvv', false);
+            }
+
+            if (!isValid) {
+                alert('Please correct the highlighted payment details to proceed.');
+            }
+
+            return isValid;
+        }
+
+        // Add auto-formatting for card number (e.g., XXXX XXXX XXXX XXXX)
+        document.getElementById('card-number').addEventListener('input', function() {
+            let value = this.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+            let formatted = '';
+            for (let i = 0; i < value.length; i++) {
+                if (i > 0 && i % 4 === 0) {
+                    formatted += ' ';
+                }
+                formatted += value[i];
+            }
+            this.value = formatted;
+        });
+    </script>
+</body>
+</html>
